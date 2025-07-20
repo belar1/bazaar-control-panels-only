@@ -3,9 +3,12 @@ import Header from "@/components/Header";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Truck, Shield, Headphones, RefreshCw, Star, Users, Package } from "lucide-react";
+import { Truck, Shield, Headphones, RefreshCw, Star, Users, Package, Store, ShoppingCart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
+  const navigate = useNavigate();
+
   const features = [
     {
       icon: Truck,
@@ -39,40 +42,100 @@ const Index = () => {
     <div className="min-h-screen bg-white" dir="rtl">
       <Header />
       
-      {/* Hero Section - Responsive */}
-      <section className="bg-gradient-to-br from-blue-50 via-purple-50 to-indigo-50 py-8 md:py-16">
+      {/* Hero Section from Image - Responsive */}
+      <section className="bg-gradient-to-br from-blue-600 via-purple-600 to-purple-700 py-12 md:py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-            <div className="text-center lg:text-right space-y-6">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent leading-tight">
-                اكتشف عالم التسوق الإلكتروني
+            {/* Right Side - Main Content */}
+            <div className="text-center lg:text-right space-y-6 text-white order-2 lg:order-1">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+                مرحباً بك في
+                <br />
+                متجر الجزائر
               </h1>
-              <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto lg:mx-0">
-                آلاف المنتجات من مئات البائعين في مكان واحد. تسوق بأمان وثقة مع ضمان الجودة
+              <p className="text-lg md:text-xl opacity-90 max-w-2xl mx-auto lg:mx-0">
+                اكتشف أفضل المنتجات من البائعين المحليين المتميزين
+                <br />
+                تسوق آمن • توصيل سريع • أسعار مناسبة
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-lg px-8 py-3">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mt-8">
+                <Button 
+                  size="lg" 
+                  className="bg-white text-blue-600 hover:bg-gray-100 text-lg px-8 py-3"
+                  onClick={() => navigate('/sellers')}
+                >
+                  <Store className="h-5 w-5 ml-2" />
+                  اكتشف البائعين
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="text-white border-white hover:bg-white hover:text-blue-600 text-lg px-8 py-3"
+                >
+                  <ShoppingCart className="h-5 w-5 ml-2" />
                   ابدأ التسوق الآن
                 </Button>
-                <Button variant="outline" size="lg" className="text-lg px-8 py-3 border-2">
-                  تصفح الفئات
-                </Button>
+              </div>
+              
+              {/* Quality Badges */}
+              <div className="flex flex-wrap justify-center lg:justify-start gap-4 mt-6">
+                <div className="flex items-center gap-2 bg-white/20 rounded-full px-4 py-2">
+                  <Shield className="h-4 w-4" />
+                  <span className="text-sm">ضمان الجودة</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/20 rounded-full px-4 py-2">
+                  <Truck className="h-4 w-4" />
+                  <span className="text-sm">توصيل مضمون</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/20 rounded-full px-4 py-2">
+                  <RefreshCw className="h-4 w-4" />
+                  <span className="text-sm">دعم آمن</span>
+                </div>
               </div>
             </div>
             
-            {/* Stats Section */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-1 gap-4">
-              {stats.map((stat, index) => (
-                <Card key={index} className="text-center border-0 shadow-lg bg-white/80 backdrop-blur">
-                  <CardContent className="p-6">
-                    <div className="inline-flex p-3 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 mb-4">
-                      <stat.icon className="h-6 w-6 text-blue-600" />
-                    </div>
-                    <div className="text-2xl font-bold text-gray-800 mb-1">{stat.number}</div>
-                    <div className="text-sm text-gray-600">{stat.label}</div>
-                  </CardContent>
-                </Card>
-              ))}
+            {/* Left Side - Stats Section */}
+            <div className="grid grid-cols-2 gap-4 order-1 lg:order-2">
+              {/* Seller Stats */}
+              <Card className="text-center border-0 shadow-lg bg-green-500/90 text-white backdrop-blur">
+                <CardContent className="p-6">
+                  <div className="inline-flex p-3 rounded-full bg-white/20 mb-4">
+                    <Store className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="text-2xl font-bold mb-1">+5000</div>
+                  <div className="text-sm opacity-90">متجر متنوع</div>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center border-0 shadow-lg bg-blue-500/90 text-white backdrop-blur">
+                <CardContent className="p-6">
+                  <div className="inline-flex p-3 rounded-full bg-white/20 mb-4">
+                    <Users className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="text-2xl font-bold mb-1">+100</div>
+                  <div className="text-sm opacity-90">بائع متميز</div>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center border-0 shadow-lg bg-purple-500/90 text-white backdrop-blur">
+                <CardContent className="p-6">
+                  <div className="inline-flex p-3 rounded-full bg-white/20 mb-4">
+                    <ShoppingCart className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="text-2xl font-bold mb-1">+10k</div>
+                  <div className="text-sm opacity-90">طلب مكتمل</div>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center border-0 shadow-lg bg-yellow-500/90 text-white backdrop-blur">
+                <CardContent className="p-6">
+                  <div className="inline-flex p-3 rounded-full bg-white/20 mb-4">
+                    <Star className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="text-2xl font-bold mb-1">4.8</div>
+                  <div className="text-sm opacity-90">تقييم العملاء</div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>

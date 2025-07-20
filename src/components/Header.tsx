@@ -83,7 +83,7 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Action Icons */}
+          {/* Action Icons - Fixed Order */}
           <div className="flex items-center gap-2">
             {/* Become a Seller - Hidden on mobile */}
             {!isMobile && (
@@ -96,6 +96,22 @@ const Header = () => {
                 <span>كن بائعاً</span>
               </Button>
             )}
+
+            {/* Favorites */}
+            <Button variant="ghost" size="icon" className="relative hover:bg-red-50 p-2">
+              <Heart className="h-6 w-6 text-gray-600" />
+              <Badge className="absolute -top-1 -left-1 h-5 w-5 p-0 text-xs bg-red-500 text-white">
+                3
+              </Badge>
+            </Button>
+
+            {/* Shopping Cart */}
+            <Button variant="ghost" size="icon" className="relative hover:bg-blue-50 p-2">
+              <ShoppingCart className="h-6 w-6 text-gray-600" />
+              <Badge className="absolute -top-1 -left-1 h-5 w-5 p-0 text-xs bg-blue-500 text-white">
+                2
+              </Badge>
+            </Button>
 
             {/* Login Dropdown */}
             <DropdownMenu>
@@ -116,22 +132,6 @@ const Header = () => {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-
-            {/* Favorites */}
-            <Button variant="ghost" size="icon" className="relative hover:bg-red-50 p-2">
-              <Heart className="h-6 w-6 text-gray-600" />
-              <Badge className="absolute -top-1 -left-1 h-5 w-5 p-0 text-xs bg-red-500 text-white">
-                3
-              </Badge>
-            </Button>
-
-            {/* Shopping Cart */}
-            <Button variant="ghost" size="icon" className="relative hover:bg-blue-50 p-2">
-              <ShoppingCart className="h-6 w-6 text-gray-600" />
-              <Badge className="absolute -top-1 -left-1 h-5 w-5 p-0 text-xs bg-blue-500 text-white">
-                2
-              </Badge>
-            </Button>
           </div>
         </div>
       </div>
@@ -150,26 +150,26 @@ const Header = () => {
                   {category}
                 </Button>
               ))}
-              
-              {/* More Categories Dropdown */}
-              {moreCategories.length > 0 && (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" className="flex items-center gap-2 hover:text-blue-600 hover:bg-blue-50">
-                      <MoreHorizontal className="h-4 w-4" />
-                      <span>المزيد</span>
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-48 bg-white border shadow-lg">
-                    {moreCategories.map((category, index) => (
-                      <DropdownMenuItem key={index}>
-                        {category}
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              )}
             </div>
+              
+            {/* More Categories Dropdown - Positioned on the left */}
+            {moreCategories.length > 0 && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="flex items-center gap-2 hover:text-blue-600 hover:bg-blue-50 mr-4">
+                    <MoreHorizontal className="h-4 w-4" />
+                    <span>المزيد</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48 bg-white border shadow-lg">
+                  {moreCategories.map((category, index) => (
+                    <DropdownMenuItem key={index}>
+                      {category}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )}
           </div>
         </div>
       </div>
