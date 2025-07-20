@@ -1,5 +1,5 @@
 
-import { Search, Heart, ShoppingCart, User, Store, Menu, ChevronDown } from "lucide-react";
+import { Search, Heart, ShoppingCart, User, Store, Menu, ChevronDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -11,6 +11,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 
 const Header = () => {
@@ -24,42 +25,17 @@ const Header = () => {
     "المنزل والحديقة",
     "الرياضة والصحة",
     "الأم والطفل",
-    "الإكسسوارات"
+    "الإكسسوارات",
+    "الكتب والتعليم",
+    "السيارات",
+    "الطعام والمشروبات"
   ];
+
+  const visibleCategories = isMobile ? categories.slice(0, 2) : categories.slice(0, 6);
+  const moreCategories = isMobile ? categories.slice(2) : categories.slice(6);
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50" dir="rtl">
-      {/* Top Bar */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center text-sm">
-            <div className="hidden md:flex items-center gap-4">
-              <span>مرحباً بك في متجر الجزائر</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <Button 
-                variant="ghost" 
-                size="sm"
-                className="text-white hover:bg-white/20 h-auto p-1"
-                onClick={() => navigate('/seller')}
-              >
-                <User className="h-4 w-4 ml-1" />
-                تسجيل دخول العملاء
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm"
-                className="text-white hover:bg-white/20 h-auto p-1"
-                onClick={() => navigate('/customer')}
-              >
-                <Store className="h-4 w-4 ml-1" />
-                تسجيل دخول البائعين
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Main Header */}
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between gap-4">
@@ -121,6 +97,26 @@ const Header = () => {
               </Button>
             )}
 
+            {/* Login Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="relative hover:bg-gray-50 p-2">
+                  <User className="h-6 w-6 text-gray-600" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48 bg-white border shadow-lg">
+                <DropdownMenuItem onClick={() => navigate('/customer')}>
+                  <User className="h-4 w-4 ml-2" />
+                  تسجيل دخول العملاء
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => navigate('/seller')}>
+                  <Store className="h-4 w-4 ml-2" />
+                  تسجيل دخول البائعين
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
             {/* Favorites */}
             <Button variant="ghost" size="icon" className="relative hover:bg-red-50 p-2">
               <Heart className="h-6 w-6 text-gray-600" />
@@ -144,8 +140,8 @@ const Header = () => {
       <div className="bg-gray-50 border-t border-gray-200">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-2">
-            <div className="hidden md:flex items-center gap-6 overflow-x-auto">
-              {categories.map((category, index) => (
+            <div className="flex items-center gap-6 overflow-x-auto flex-1">
+              {visibleCategories.map((category, index) => (
                 <Button
                   key={index}
                   variant="ghost"
@@ -154,26 +150,26 @@ const Header = () => {
                   {category}
                 </Button>
               ))}
+              
+              {/* More Categories Dropdown */}
+              {moreCategories.length > 0 && (
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="flex items-center gap-2 hover:text-blue-600 hover:bg-blue-50">
+                      <MoreHorizontal className="h-4 w-4" />
+                      <span>المزيد</span>
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-48 bg-white border shadow-lg">
+                    {moreCategories.map((category, index) => (
+                      <DropdownMenuItem key={index}>
+                        {category}
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              )}
             </div>
-            
-            {/* Mobile Categories Dropdown */}
-            {isMobile && (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="flex items-center gap-2">
-                    <span>الفئات</span>
-                    <ChevronDown className="h-4 w-4" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48">
-                  {categories.map((category, index) => (
-                    <DropdownMenuItem key={index}>
-                      {category}
-                    </DropdownMenuItem>
-                  ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            )}
           </div>
         </div>
       </div>

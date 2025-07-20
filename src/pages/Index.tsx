@@ -1,6 +1,5 @@
 
 import Header from "@/components/Header";
-import CategorySection from "@/components/CategorySection";
 import FeaturedProducts from "@/components/FeaturedProducts";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -78,8 +77,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
-      <CategorySection />
       
       <FeaturedProducts />
 
